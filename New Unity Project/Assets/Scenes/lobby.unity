@@ -201,15 +201,15 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   serverTickRate: 30
-  offlineScene: Assets/Scenes/lobby.unity
-  onlineScene: Assets/Scenes/game.unity
+  offlineScene: Assets/lobby.unity
+  onlineScene: Assets/game.unity
   transport: {fileID: 125566094}
   networkAddress: localhost
   maxConnections: 100
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 2328866542321575668, guid: 3b00b9e1726bb7243b9dcf4ccfd7c934, type: 3}
+  playerPrefab: {fileID: 0}
   autoCreatePlayer: 1
-  playerSpawnMethod: 1
+  playerSpawnMethod: 0
   spawnPrefabs: []
 --- !u!4 &125566096
 Transform:
