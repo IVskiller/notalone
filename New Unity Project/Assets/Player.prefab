@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2381050967451886590}
   - component: {fileID: 2381050967451886529}
   - component: {fileID: 2381050967451886528}
+  - component: {fileID: 8430560181082400278}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -99,7 +100,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: 
+  m_AssetId: 3b00b9e1726bb7243b9dcf4ccfd7c934
   hasSpawned: 0
 --- !u!114 &2381050967451886528
 MonoBehaviour:
@@ -135,3 +136,20 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &8430560181082400278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2381050967451886531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682b425683ca34b4caf51569bb38431f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  Will: 0
+  Hand: 
+  Gy: 
