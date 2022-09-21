@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
 public class BoardState : NetworkBehaviour
-{
+{ 
     public readonly SyncList<Playerinf> Boardst = new SyncList<Playerinf>();
+
     public struct Playerinf
  {
     public int Will;
@@ -44,4 +45,4 @@ public class BoardState : NetworkBehaviour
         
     }
     
-}
+}*/
