@@ -10,7 +10,7 @@ public class playerscript : NetworkBehaviour
 {
     [Scene] public string gamescene = string.Empty;
     public BoardState BoardState_;
-    public int playertype;
+    public bool playertype;
     public int Will;
     public bool[] Hand;
     public bool[] Gy;
@@ -18,9 +18,12 @@ public class playerscript : NetworkBehaviour
     public bool River;
     public bool Artefact;
     public bool clcon;
+    [HideInInspector]
+    public StartButton startButton_;
     // Start is called before the first frame update
     void Start()
     {
+        playertype = false;
         Will = 3;
         Setcard = 0;
         River = false;
@@ -29,7 +32,7 @@ public class playerscript : NetworkBehaviour
         Hand = new bool[] { true, true, true, true, true, false, false, false, false, false };
         clcon = true;
         BoardState_ = FindObjectOfType<BoardState>();
-
+        startButton_ = FindObjectOfType<StartButton>();
     }
 
     void Update()
@@ -37,17 +40,16 @@ public class playerscript : NetworkBehaviour
         
         if (!hasAuthority) { return; }
         else {
-            if (clcon)
-            {
-                OnClientConnect();
-                clcon = false;
-            }
+
+           
+
             if (Input.GetKeyDown(KeyCode.Q)) CmdRiver();
 
             if (Input.GetKeyDown(KeyCode.W)) CmdWill();
 
-            if (Input.GetKeyDown(KeyCode.E)) CmdTurn();
+            if(startButton_.startch) if (isServer && hasAuthority) CmdMonsterset();
         }
+
 
     }
 
@@ -74,7 +76,6 @@ public class playerscript : NetworkBehaviour
     private void RpcRiver()
     {
         Setcard -= 1;
-
     }
 
     [Command]
@@ -88,8 +89,17 @@ public class playerscript : NetworkBehaviour
     {
         BoardState_.Playernumb++;
     }
-    public void OnClientConnect()
+
+    [Command]
+    public void CmdMonsterset()
     {
-        Plnumb();
+        BoardState_.MonsterID = ((int)netIdentity.netId);
+        RpcMonsterset();
+    }
+
+    [ClientRpc]
+    public void RpcMonsterset()
+    {
+        if (((int)netIdentity.netId) == BoardState_.MonsterID) playertype = true;
     }
 }

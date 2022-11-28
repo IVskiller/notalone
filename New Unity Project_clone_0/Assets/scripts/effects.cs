@@ -21,8 +21,6 @@ public class effects : MonoBehaviour
 
     public void OnClick()
     {
-        //if (playerscript_.Hand[0]) { playerscript_.Hand[0] = false; }
-        //else { playerscript_.Hand[0] = true; }
         Debug.Log("efekt1");
     }
 }

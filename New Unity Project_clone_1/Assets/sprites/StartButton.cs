@@ -1,14 +1,20 @@
+using Mirror;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class StartButton : MonoBehaviour
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+public class StartButton : NetworkBehaviour
 {
     public GameObject startb;
-    // Start is called before the first frame update
+    public bool startch;
+    public int buttodel;
     void Start()
     {
         
+        startch = false;
+        buttodel = ((int)netIdentity.netId);
     }
 
     // Update is called once per frame
@@ -19,7 +25,18 @@ public class StartButton : MonoBehaviour
 
     public void OnClick()
     {
+        startch = true;
+        if(!hasAuthority)Cmdbuttodell();
+    }
 
+    [Command]
+    public void Cmdbuttodell() {
+        Rpcbuttodell();
+    }
+    [ClientRpc]
+    public void Rpcbuttodell()
+    {
         startb.SetActive(false);
     }
+
 }

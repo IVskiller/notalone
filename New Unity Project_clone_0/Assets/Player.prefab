@@ -118,12 +118,15 @@ MonoBehaviour:
   syncInterval: 0.1
   gamescene: Assets/Scenes/game.unity
   BoardState_: {fileID: 0}
+  playertype: 0
   Will: 0
   Hand: 
   Gy: 
   Setcard: 0
   River: 0
   Artefact: 0
+  clcon: 0
+  StartButton_: {fileID: 5301488140169962715, guid: 7f0f528fd19e85247981749bb5b82d79, type: 3}
 --- !u!114 &7338266110525317179
 MonoBehaviour:
   m_ObjectHideFlags: 0
