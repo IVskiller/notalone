@@ -5,11 +5,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class playerscript : NetworkBehaviour
 {
     [Scene] public string gamescene = string.Empty;
+    public StartButton startButton_;
     public BoardState BoardState_;
+    public effects effects_;
+    public TurnButton turnButton_;
+    public Text text_;
+    public int playerID;
     public bool playertype;
     public int Will;
     public bool[] Hand;
@@ -18,11 +24,18 @@ public class playerscript : NetworkBehaviour
     public bool River;
     public bool Artefact;
     public bool clcon;
-    [HideInInspector]
-    public StartButton startButton_;
+   
+
+    
     // Start is called before the first frame update
     void Start()
     {
+        
+        BoardState_ = FindObjectOfType<BoardState>();
+        startButton_ = FindObjectOfType<StartButton>();
+        effects_ = FindObjectOfType<effects>();
+        turnButton_ = FindObjectOfType<TurnButton>();
+        
         playertype = false;
         Will = 3;
         Setcard = 0;
@@ -31,65 +44,25 @@ public class playerscript : NetworkBehaviour
         Gy = new bool[] { true, true, true, true, true, false, false, false, false, false };
         Hand = new bool[] { true, true, true, true, true, false, false, false, false, false };
         clcon = true;
-        BoardState_ = FindObjectOfType<BoardState>();
-        startButton_ = FindObjectOfType<StartButton>();
+        if (hasAuthority) CmdIDset();
+
     }
 
     void Update()
     {
-        
-        if (!hasAuthority) { return; }
-        else {
-
+        if (startButton_.startch)
+        {
+            if (isServer && hasAuthority) CmdMonsterset();
+            startButton_.startb.SetActive(false);
+            if (hasAuthority && isLocalPlayer) placescriptset();
+            turnButton_.turnb.SetActive(true);
            
 
-            if (Input.GetKeyDown(KeyCode.Q)) CmdRiver();
 
-            if (Input.GetKeyDown(KeyCode.W)) CmdWill();
-
-            if(startButton_.startch) if (isServer && hasAuthority) CmdMonsterset();
         }
-
-
     }
 
-    
-    [Command]
-    private void CmdWill()
-    {
-        RpcWill();
-    }
-
-    [ClientRpc]
-    private void RpcWill()
-    {
-        Will -= 1;
-    }
-
-    [Command]
-    private void CmdRiver()
-    {
-        RpcRiver();
-    }
-
-    [ClientRpc]
-    private void RpcRiver()
-    {
-        Setcard -= 1;
-    }
-
-    [Command]
-    private void CmdTurn()
-    {
-        BoardState_.Turn++;
-    }
-
-    [Command]
-    public void Plnumb()
-    {
-        BoardState_.Playernumb++;
-    }
-
+    #region monsterset
     [Command]
     public void CmdMonsterset()
     {
@@ -102,4 +75,36 @@ public class playerscript : NetworkBehaviour
     {
         if (((int)netIdentity.netId) == BoardState_.MonsterID) playertype = true;
     }
-}
+    #endregion
+    #region idset
+    [Command]
+    public void CmdIDset()
+    {
+        
+        RpcIDset();
+    }
+
+    [ClientRpc]
+    public void RpcIDset()
+    {
+        playerID = BoardState_.playerIDgive;
+        BoardState_.playerIDgive++;
+    }
+    #endregion
+    #region redch
+    [Command]
+    public void redch1() {      
+        BoardState_.readych--;    
+    }
+
+    [Command]
+    public void redch2()
+    {
+        BoardState_.readych++;
+    }
+        public void placescriptset() {
+        effects_.playerscript_ = this;
+    }
+    #endregion
+    
+    }

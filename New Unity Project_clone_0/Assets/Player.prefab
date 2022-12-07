@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7338266110525317179}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,10 @@ MonoBehaviour:
   syncInterval: 0.1
   gamescene: Assets/Scenes/game.unity
   BoardState_: {fileID: 0}
+  effects_: {fileID: 0}
+  turnButton_: {fileID: 0}
+  playerredytxt: {fileID: 1226735601131340164, guid: b42e0ac0b51ebd7429fe268cfe6aef46, type: 3}
+  playerID: 0
   playertype: 0
   Will: 0
   Hand: 
@@ -126,7 +130,7 @@ MonoBehaviour:
   River: 0
   Artefact: 0
   clcon: 0
-  StartButton_: {fileID: 5301488140169962715, guid: 7f0f528fd19e85247981749bb5b82d79, type: 3}
+  startButton_: {fileID: 0}
 --- !u!114 &7338266110525317179
 MonoBehaviour:
   m_ObjectHideFlags: 0
