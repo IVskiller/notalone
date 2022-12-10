@@ -11,7 +11,11 @@ public class effects : MonoBehaviour
     public playerscript playerscript_;
     public Text text_;
     string tx;
-    
+    public GameObject willnmb1;
+    public GameObject willnmb2;
+    public GameObject willnmb3;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,14 +31,23 @@ public class effects : MonoBehaviour
         {      
             tx = BoardState_.readych + " / " + BoardState_.player_count;
             text_.text = tx;
+            
 
         }
     }
 
     public void PlaceCliced(int x)
     {
-        Debug.Log("efekt "+ x);
-         playerscript_.Setcard = x;
+
+        if (BoardState_.Phase == 1 && playerscript_.playertype == false)
+        {
+            Debug.Log("postavljena karta " + x);
+            playerscript_.Setcard = x;
+        }
+        if (BoardState_.Phase == 2 && playerscript_.playertype) {
+            Debug.Log("postavljena karta " + x);
+            BoardState_.Monstercardset = x;
+        }
     }
 
     

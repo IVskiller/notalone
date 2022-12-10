@@ -16,6 +16,10 @@ public class BoardState : NetworkBehaviour
     [SyncVar] [SerializeField] public int playerIDgive;
     [SyncVar] [SerializeField] public int readych;
     [SyncVar] [SerializeField] public bool turnbutres;
+    [SyncVar] [SerializeField] public int  Monstercardset;
+    [SyncVar] [SerializeField] public int surposnum;
+    [SyncVar] [SerializeField] public int monposnum;
+
     public playerscript playerscript_;
     public TurnButton turnButton_;
     public effects effects_;
@@ -42,12 +46,15 @@ public class BoardState : NetworkBehaviour
             turnbutres=true;
             readych = 0;
         }
+
     }
 
     public void Player_countf() { 
             GameObject[] playercount = GameObject.FindGameObjectsWithTag("player");
             player_count = playercount.Length;
     }
+
+    
 
     
 }
