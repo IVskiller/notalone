@@ -31,8 +31,10 @@ public class playerscript : NetworkBehaviour
     public bool Artefact;
     public bool clcon;
     public bool ifhit;
+    public bool phase1;
     public bool phase3; 
     public bool phase4;
+    public bool boardstartpoz;
 
 
 
@@ -48,7 +50,7 @@ public class playerscript : NetworkBehaviour
         playerparent = transform.Find("players");
         playertype = false;
         Will = 3;
-        Setcard = 0;
+        Setcard = 11;
         River = false;
         Artefact = false;
         Gy = new bool[] { true, true, true, true, true, false, false, false, false, false };
@@ -58,18 +60,36 @@ public class playerscript : NetworkBehaviour
         phase3 = true;
         phase4 = true;
         ifhit = false;
+        boardstartpoz = true;
+        
     }
 
     void Update()
-    {
-        if (startButton_.startch)
-        {
+    {if (startButton_.startch){
+            
             playerobject_.transform.SetParent(canvas_.transform);
             if (isServer && hasAuthority) CmdMonsterset();
             startButton_.startb.SetActive(false);
             if (hasAuthority && isLocalPlayer) placescriptset();
-            turnButton_.turnb.SetActive(true);
+           
+            if (Will == 0)
+            {
+                Will=3;
+                BoardState_.monposnum--;
+            }
+            if (boardstartpoz)
+            {
+                BoardState_.surposnum = 12 + BoardState_.player_count;
+                BoardState_.monposnum = 6 + BoardState_.player_count;
+                boardstartpoz = false;
+            }
+            #region phases
             if (BoardState_.Phase == 1) {
+                if (phase1) { 
+                    Setcard = 11;
+                    phase1 = false;
+                }
+               
                 phase3 = true;
                 phase4 = true;
             }
@@ -81,11 +101,13 @@ public class playerscript : NetworkBehaviour
                     if (Setcard == BoardState_.Monstercardset)
                     {
                         cmdwill();
-                        
                         Debug.Log("HIT");
                     }
-                    else Debug.Log("MISS");
-                    
+                    else { 
+                        Debug.Log("MISS");
+                        Debug.Log("efekt "+ Setcard);
+                    }
+                    Hand[Setcard - 1] = false;
                     phase3 = false;
                     
                 }
@@ -94,9 +116,10 @@ public class playerscript : NetworkBehaviour
             if (BoardState_.Phase == 4 && phase4)
             {
                 if(isServer && isLocalPlayer) surbordmov();
-                
+                phase1 = true;
                 phase4 = false;
             }
+            #endregion
             #region willvisual
             if (playertype)
             {

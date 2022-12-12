@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class placescript : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class placescript : MonoBehaviour
     public effects effects_;
     public BoardState boardState_;
     public playerscript playerscript_;
+    public StartButton StartButton_;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,7 @@ public class placescript : MonoBehaviour
         
     }
 
+    
     public void OnClick(int cardnum) {
     effects_.PlaceCliced(cardnum);
     }

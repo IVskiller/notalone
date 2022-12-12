@@ -27,15 +27,35 @@ public class TurnButton : MonoBehaviour
 
     public void OnClick()
     {
-        if (this.PlayerReadych)
-        {    
-            playerscript_.redch1();
-            PlayerReadych = false;
+        if (playerscript_.isLocalPlayer && playerscript_.playertype == false)
+        {
+            if (playerscript_.Setcard == 11) Debug.Log("select card");
+            else
+            {
+                if (this.PlayerReadych)
+                {
+                    playerscript_.redch1();
+                    PlayerReadych = false;
+                }
+                else if (this.PlayerReadych == false)
+                {
+                    playerscript_.redch2();
+                    PlayerReadych = true;
+                }
+            }
         }
-        else if(this.PlayerReadych == false)
-        {     
-            playerscript_.redch2();
-            PlayerReadych = true;
-        }      
+        else {
+            if (this.PlayerReadych)
+            {
+                playerscript_.redch1();
+                PlayerReadych = false;
+            }
+            else if (this.PlayerReadych == false)
+            {
+                playerscript_.redch2();
+                PlayerReadych = true;
+            }
+        }
+             
     }
 }
