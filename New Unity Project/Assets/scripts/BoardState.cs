@@ -33,6 +33,7 @@ public class BoardState : NetworkBehaviour
         Phase = 1;
         Playernumb = 0;
         turnbutres = false;
+        Monstercardset = 11;
     }
     public void Update()
     {
@@ -40,12 +41,13 @@ public class BoardState : NetworkBehaviour
         if (Phase == 5) {
             Phase = 1;
         }
-        if (player_count == readych)
+        if (player_count  == readych)
         {
             Phase++;
             turnbutres=true;
             readych = 0;
         }
+        
 
     }
 

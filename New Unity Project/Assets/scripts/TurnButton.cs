@@ -29,7 +29,8 @@ public class TurnButton : MonoBehaviour
     {
         if (playerscript_.isLocalPlayer && playerscript_.playertype == false)
         {
-            if (playerscript_.Setcard == 11) Debug.Log("select card");
+            if (playerscript_.Setcard == 11 && BoardState_.Phase==1) Debug.Log("select card");
+            else if (playerscript_.effectcard == 11 && BoardState_.Phase == 3) Debug.Log("select card");
             else
             {
                 if (this.PlayerReadych)
@@ -43,17 +44,22 @@ public class TurnButton : MonoBehaviour
                     PlayerReadych = true;
                 }
             }
+            
         }
-        else {
-            if (this.PlayerReadych)
+        else if (playerscript_.isLocalPlayer && playerscript_.playertype == true){
+            if (BoardState_.Monstercardset == 11 && BoardState_.Phase == 2) Debug.Log("select card");
+            else
             {
-                playerscript_.redch1();
-                PlayerReadych = false;
-            }
-            else if (this.PlayerReadych == false)
-            {
-                playerscript_.redch2();
-                PlayerReadych = true;
+                if (this.PlayerReadych)
+                {
+                    playerscript_.redch1();
+                    PlayerReadych = false;
+                }
+                else if (this.PlayerReadych == false)
+                {
+                    playerscript_.redch2();
+                    PlayerReadych = true;
+                }
             }
         }
              

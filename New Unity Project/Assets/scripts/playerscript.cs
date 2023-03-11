@@ -35,7 +35,9 @@ public class playerscript : NetworkBehaviour
     public bool phase3; 
     public bool phase4;
     public bool boardstartpoz;
-
+    public bool effectcardselect;
+    public int effectnum;
+    public int effectcard;
 
 
     // Start is called before the first frame update
@@ -53,7 +55,7 @@ public class playerscript : NetworkBehaviour
         Setcard = 11;
         River = false;
         Artefact = false;
-        Gy = new bool[] { true, true, true, true, true, false, false, false, false, false };
+        Gy = new bool[] {  false, false, false, false, false, false, false, false, false, false };
         Hand = new bool[] { true, true, true, true, true, false, false, false, false, false };
         clcon = true;
         if (hasAuthority) CmdIDset();
@@ -61,7 +63,9 @@ public class playerscript : NetworkBehaviour
         phase4 = true;
         ifhit = false;
         boardstartpoz = true;
-        
+        effectnum = 11;
+        effectcard = 12;
+        effectcardselect = false;
     }
 
     void Update()
@@ -89,7 +93,7 @@ public class playerscript : NetworkBehaviour
                     Setcard = 11;
                     phase1 = false;
                 }
-               
+                effectcard = 11;
                 phase3 = true;
                 phase4 = true;
             }
@@ -102,12 +106,16 @@ public class playerscript : NetworkBehaviour
                     {
                         cmdwill();
                         Debug.Log("HIT");
+                        effectcard = 12;
                     }
                     else { 
                         Debug.Log("MISS");
+                        effectnum = Setcard;
                         Debug.Log("efekt "+ Setcard);
+
                     }
                     Hand[Setcard - 1] = false;
+                    Gy[Setcard - 1] = true;
                     phase3 = false;
                     
                 }
@@ -116,7 +124,7 @@ public class playerscript : NetworkBehaviour
             if (BoardState_.Phase == 4 && phase4)
             {
                 if(isServer && isLocalPlayer) surbordmov();
-                phase1 = true;
+                phase1=true;
                 phase4 = false;
             }
             #endregion
