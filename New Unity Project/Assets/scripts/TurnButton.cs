@@ -30,7 +30,7 @@ public class TurnButton : MonoBehaviour
         if (playerscript_.isLocalPlayer && playerscript_.playertype == false)
         {
             if (playerscript_.Setcard == 11 && BoardState_.Phase==1) Debug.Log("select card");
-            else if (playerscript_.effectcard == 11 && BoardState_.Phase == 3) Debug.Log("select card");
+          //  else if (playerscript_.effectcard == 11 && BoardState_.Phase == 3) Debug.Log("select card");
             else
             {
                 if (this.PlayerReadych)

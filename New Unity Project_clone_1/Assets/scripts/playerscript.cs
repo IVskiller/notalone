@@ -102,6 +102,7 @@ public class playerscript : NetworkBehaviour
             {
                 if (BoardState_.Phase == 3 && phase3)
                 {
+                    
                     if (Setcard == BoardState_.Monstercardset)
                     {
                         cmdwill();

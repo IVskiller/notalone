@@ -102,7 +102,7 @@ public class effects : MonoBehaviour
 
     public void PlaceCliced(int x)
     {
-        if (playerscript_.effectcardselect == false)
+        //if (playerscript_.effectcardselect == false)
         {
             if (BoardState_.Phase == 1 && playerscript_.playertype == false)
             {
@@ -119,13 +119,14 @@ public class effects : MonoBehaviour
                 BoardState_.Monstercardset = x;
             }
             
-        }
+       /* }
         else {
             
             if (BoardState_.Phase == 3 && playerscript_.playertype == false) {
                 Debug.Log("odabrana je karta " + x);
                 playerscript_.effectcard = 1;
             }
+       */
         }
 
     }
